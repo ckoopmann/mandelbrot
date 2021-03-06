@@ -14,7 +14,7 @@ void Visualization::Run(Renderer &renderer) {
   while (running) {
     frame_start = SDL_GetTicks();
 
-    // Input, Update, Render - the main game loop.
+    // Input, Update, Render - the main visualization loop.
     renderer.Render();
 
     frame_end = SDL_GetTicks();

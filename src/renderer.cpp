@@ -43,6 +43,9 @@ void Renderer::Render() {
   SDL_SetRenderDrawColor(sdl_renderer, 0x1E, 0x1E, 0x1E, 0xFF);
   SDL_RenderClear(sdl_renderer);
 
+  SDL_SetRenderDrawColor(sdl_renderer, 255, 0, 0, 255);
+  for (int i = 0; i < screen_width; ++i)
+      SDL_RenderDrawPoint(sdl_renderer, i, i);
   // Update Screen
   SDL_RenderPresent(sdl_renderer);
 }
