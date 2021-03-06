@@ -1,43 +1,28 @@
 #include "visualization.h"
+#include "position.h"
+#include "controller.h"
 #include <iostream>
 #include "SDL.h"
 
 void Visualization::Run(Renderer &renderer) {
-  constexpr std::size_t kFramesPerSecond{60};
-  constexpr std::size_t kMsPerFrame{1000 / kFramesPerSecond};
+  constexpr std::size_t kFramesPerSecond{1};
+  constexpr std::size_t kMsPerFrame{10000 / kFramesPerSecond};
 
   bool running = true;
   Uint32 frame_start;
   Uint32 frame_end;
   Uint32 frame_duration;
 
+  Position position {0.0, 0.0};
+  Controller controller;
+
   while (running) {
-    frame_start = SDL_GetTicks();
 
-    // Input, Update, Render - the main visualization loop.
-    renderer.Render();
+    renderer.Render(position);
+    controller.HandleInput(running, position);
 
-    frame_end = SDL_GetTicks();
+    std::cout << "Current Position: (" << position.GetX() << "," << position.GetY() <<")" << std::endl;
 
-    // event handling
-    SDL_Event e;
-    if ( SDL_PollEvent(&e) ) {
-        if (e.type == SDL_QUIT)
-            break;
-        else if (e.type == SDL_KEYUP && e.key.keysym.sym == SDLK_ESCAPE)
-            break;
-    }
-
-    // Keep track of how long each loop through the input/update/render cycle
-    // takes.
-    frame_duration = frame_end - frame_start;
-
-    // If the time for this frame is too small (i.e. frame_duration is
-    // smaller than the target ms_per_frame), delay the loop to
-    // achieve the correct frame rate.
-    if (frame_duration < kMsPerFrame) {
-      SDL_Delay(kMsPerFrame - frame_duration);
-    }
   }
 }
 

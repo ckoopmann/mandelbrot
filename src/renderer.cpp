@@ -1,30 +1,27 @@
 #include "renderer.h"
+#include "position.h"
 #include <iostream>
 #include <string>
 #include <complex>
 using namespace std::complex_literals;
 
-int mandelbrotRGBValue ( int x, int y, int width, int height)  {
-    std::complex<double> point = (((double) x/width)-1.5) + ((double)y/height-0.5)*1i;
+int mandelbrotRGBValue ( int x, int y, int width, int height, Position &position)  {
+    std::complex<double> point = ((((double) x/width)-1.5) + position.GetX()) + (((double)y/height-0.5)*1i + position.GetY());
     // we divide by the image dimensions to get values smaller than 1
     // then apply a translation
     std::complex<double> z = 0;
-    unsigned int nb_iter = 0;
-    while (abs (z) < 2 && nb_iter <= 34) {
+    unsigned int nb_iter = 255;
+    while (abs (z) < 2 && nb_iter > 0) {
         z = z * z + point;
-        nb_iter++;
+        nb_iter--;
     }
-    if (nb_iter < 34) return 255;
-    else return 0;
+    return nb_iter;
 }
 
 Renderer::Renderer(const std::size_t screen_width,
-                   const std::size_t screen_height,
-                   const std::size_t grid_width, const std::size_t grid_height)
+                   const std::size_t screen_height)
     : screen_width(screen_width),
-      screen_height(screen_height),
-      grid_width(grid_width),
-      grid_height(grid_height) {
+      screen_height(screen_height){
   // Initialize SDL
   if (SDL_Init(SDL_INIT_VIDEO) < 0) {
     std::cerr << "SDL could not initialize.\n";
@@ -54,14 +51,14 @@ Renderer::~Renderer() {
   SDL_Quit();
 }
 
-void Renderer::Render() {
+void Renderer::Render(Position &position) {
   // Clear screen
   SDL_SetRenderDrawColor(sdl_renderer, 0x1E, 0x1E, 0x1E, 0xFF);
   SDL_RenderClear(sdl_renderer);
 
   for (int j = 0; j < screen_height; ++j) {
     for (int i = 0; i < screen_width; ++i) {
-        int red_value = mandelbrotRGBValue(i, j, screen_width, screen_height);
+        int red_value = mandelbrotRGBValue(i, j, screen_width, screen_height, position);
         SDL_SetRenderDrawColor(sdl_renderer, red_value, 0, 0, 255);
         SDL_RenderDrawPoint(sdl_renderer, i, j);
     }
