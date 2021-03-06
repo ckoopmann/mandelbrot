@@ -1,6 +1,22 @@
 #include "renderer.h"
 #include <iostream>
 #include <string>
+#include <complex>
+using namespace std::complex_literals;
+
+int mandelbrotRGBValue ( int x, int y, int width, int height)  {
+    std::complex<double> point = (((double) x/width)-1.5) + ((double)y/height-0.5)*1i;
+    // we divide by the image dimensions to get values smaller than 1
+    // then apply a translation
+    std::complex<double> z = 0;
+    unsigned int nb_iter = 0;
+    while (abs (z) < 2 && nb_iter <= 34) {
+        z = z * z + point;
+        nb_iter++;
+    }
+    if (nb_iter < 34) return 255;
+    else return 0;
+}
 
 Renderer::Renderer(const std::size_t screen_width,
                    const std::size_t screen_height,
@@ -43,9 +59,15 @@ void Renderer::Render() {
   SDL_SetRenderDrawColor(sdl_renderer, 0x1E, 0x1E, 0x1E, 0xFF);
   SDL_RenderClear(sdl_renderer);
 
-  SDL_SetRenderDrawColor(sdl_renderer, 255, 0, 0, 255);
-  for (int i = 0; i < screen_width; ++i)
-      SDL_RenderDrawPoint(sdl_renderer, i, i);
+  for (int j = 0; j < screen_height; ++j) {
+    for (int i = 0; i < screen_width; ++i) {
+        int red_value = mandelbrotRGBValue(i, j, screen_width, screen_height);
+        SDL_SetRenderDrawColor(sdl_renderer, red_value, 0, 0, 255);
+        SDL_RenderDrawPoint(sdl_renderer, i, j);
+    }
+  }
+
   // Update Screen
   SDL_RenderPresent(sdl_renderer);
 }
+
