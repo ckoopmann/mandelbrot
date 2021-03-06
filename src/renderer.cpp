@@ -6,16 +6,16 @@
 using namespace std::complex_literals;
 
 int mandelbrotRGBValue ( int x, int y, int width, int height, Position &position)  {
-    std::complex<double> point = ((((double) x/width)-1.5) + position.GetX()) + (((double)y/height-0.5)*1i + position.GetY());
+    std::complex<double> point = ((((double) x/width)-1.5) + position.GetX()) + (((double)y/height-0.5) + position.GetY())*1i ;
     // we divide by the image dimensions to get values smaller than 1
     // then apply a translation
     std::complex<double> z = 0;
-    unsigned int nb_iter = 255;
+    unsigned int nb_iter = 51;
     while (abs (z) < 2 && nb_iter > 0) {
         z = z * z + point;
         nb_iter--;
     }
-    return nb_iter;
+    return nb_iter*5;
 }
 
 Renderer::Renderer(const std::size_t screen_width,

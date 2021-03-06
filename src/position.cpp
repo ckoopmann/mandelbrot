@@ -7,15 +7,15 @@ Position::Position(double x, double y) {
     _y = y;
 };
 void Position::MoveUp() {
-    _y += 0.1;
-}
-
-void Position::MoveDown() {
     _y -= 0.1;
 }
 
+void Position::MoveDown() {
+    _y += 0.1;
+}
+
 void Position::MoveLeft() {
-    _x -= 0.1;
+    _x -= 1.1;
 }
 
 void Position::MoveRight() {
