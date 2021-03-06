@@ -19,6 +19,15 @@ void Visualization::Run(Renderer &renderer) {
 
     frame_end = SDL_GetTicks();
 
+    // event handling
+    SDL_Event e;
+    if ( SDL_PollEvent(&e) ) {
+        if (e.type == SDL_QUIT)
+            break;
+        else if (e.type == SDL_KEYUP && e.key.keysym.sym == SDLK_ESCAPE)
+            break;
+    }
+
     // Keep track of how long each loop through the input/update/render cycle
     // takes.
     frame_duration = frame_end - frame_start;
