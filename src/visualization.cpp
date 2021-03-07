@@ -13,7 +13,7 @@ void Visualization::Run(Renderer &renderer) {
   Uint32 frame_end;
   Uint32 frame_duration;
 
-  Position position {0.0, 0.0};
+  Position position {0.0, 0.0, 1.0};
   Controller controller;
 
   while (running) {
@@ -21,7 +21,7 @@ void Visualization::Run(Renderer &renderer) {
     renderer.Render(position);
     controller.HandleInput(running, position);
 
-    std::cout << "Current Position: (" << position.GetX() << "," << position.GetY() <<")" << std::endl;
+    std::cout << "Current Position: (" << position.GetX() << "," << position.GetY() << "," << position.GetZoomFactor() <<")" << std::endl;
 
   }
 }

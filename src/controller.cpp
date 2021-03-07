@@ -5,6 +5,9 @@
 #include "SDL.h"
 #include "position.h"
 
+// Pauses and waits for the user to enter one of the valid keys / actions 
+// and either exits the visualization loop (by setting running to false)
+// or adjusts the position and continues the visualization loop
 void Controller::HandleInput(bool &running, Position &position) const {
   SDL_Event e;
   bool waiting = true;
@@ -36,6 +39,18 @@ void Controller::HandleInput(bool &running, Position &position) const {
         case SDLK_RIGHT:
             std::cout << "Moving Right" << std::endl;
             position.MoveRight();
+            waiting = false;
+            break;
+
+        case SDLK_i:
+            std::cout << "Zooming In" << std::endl;
+            position.ZoomIn();
+            waiting = false;
+            break;
+
+        case SDLK_o:
+            std::cout << "Zooming Out" << std::endl;
+            position.ZoomOut();
             waiting = false;
             break;
 

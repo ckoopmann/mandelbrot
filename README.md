@@ -1,6 +1,6 @@
 # mandelbrot
-C++ based visualization of the mandelbrot set
-
+Interactive C++ based visualization of the mandelbrot set.
+![screenshot](screenshot.png)
 ## Dependencies for Running Locally
 * cmake >= 3.7
   * All OSes: [click here for installation instructions](https://cmake.org/install/)
@@ -18,4 +18,14 @@ C++ based visualization of the mandelbrot set
 1. Clone this repo.
 2. Make a build directory in the top level directory: `mkdir build && cd build`
 3. Compile: `cmake .. && make`
-4. Run it: `./HelloWorld`.
+4. Run it: `./Mandelbrot`.
+
+## Expected behaviour.
+
+After starting the program a view of the mandelbrot set using a smooth coloring scheme should be visualized.
+
+The user can interact with the visualization pressing the following keys:
+- `i`: Zoom in
+- `o`: Zoom out
+- Arrow Keys: Move the window to visualize different parts of the mandelbrot set.
+
