@@ -29,3 +29,14 @@ The user can interact with the visualization pressing the following keys:
 - `o`: Zoom out
 - Arrow Keys: Move the window to visualize different parts of the mandelbrot set.
 
+Since the visualization is rendered in full upon each of these actions the user can inspect
+the phenomenon in unlimited precision.
+
+## Structure
+
+The source code (found in the [src](src) directory) is structured in to the following files / classes:
+- [main.cpp](src/main.cpp): Main file that serves as entrypoint of the execution and triggers running the visualization.
+- [controller.h](src/controller.h)[controller.cpp](src/controller.cpp): Class waiting for and handling above described user actions.
+- [position.h](src/position.h)[position.cpp](src/position.cpp): Class keeping track of the position / zoom level currently to be rendered.
+- [renderer.h](src/renderer.h)[renderer.cpp](src/renderer.cpp): Class rendering each pixel when the position changes including helper functions to calculate color of each pixel based on position / zoom level.
+- [visualization.h](src/visualization.h)[visualization.cpp](src/visualization.cpp): Class containing the main render / update loop.
