@@ -40,3 +40,30 @@ The source code (found in the [src](src) directory) is structured in to the foll
 - [position.h](src/position.h) / [position.cpp](src/position.cpp): Class keeping track of the position / zoom level currently to be rendered.
 - [renderer.h](src/renderer.h) / [renderer.cpp](src/renderer.cpp): Class rendering each pixel when the position changes including helper functions to calculate color of each pixel based on position / zoom level.
 - [visualization.h](src/visualization.h) / [visualization.cpp](src/visualization.cpp): Class containing the main render / update loop.
+
+## Rubric Points Addressed
+
+### README
+See this file to verify that the given points were adressed
+
+### Compiling and Testing
+Check above mentioned build / run steps in project workspace to verify that the project compiles / tests as required.
+
+### Loops, Functions, I/O:
+- __The project demonstrates an understanding of C++ functions and control structures.__:  In the implementation [while](https://github.com/ckoopmann/mandelbrot/blob/main/src/visualization.cpp#L19), [for](https://github.com/ckoopmann/mandelbrot/blob/main/src/renderer.cpp#L93), [switch](https://github.com/ckoopmann/mandelbrot/blob/main/src/controller.cpp#L20) and [if/else](https://github.com/ckoopmann/mandelbrot/blob/main/src/controller.cpp#L16) statements are all used. Functions are used throughout the code to provide structure.
+
+- __The project accepts user input and processes the input.__: As described above the user can control the behaviour of the program by pressing different keys
+
+### Object Oriented Programming:
+-- __The project uses Object Oriented Programming techniques__: As above described the functionality is split across various different classes that controll different aspects of the behaviour / data.
+
+-- __Classes use appropriate access specifiers for class members.__: Member Attributes are all set to private. See [position.h](src/position.h) for examples.
+
+-- __Classes abstract implementation details from their interfaces.__: Again see [position.h](src/position.h) for clearly defined / self documenting function names and abstraction of implementation details. The other classes mostly follow the example of the SDL starter code.
+
+-- __Classes encapsulate behavior__: Again the `position` class is an example of behaviour that fulfils this requirment.
+
+
+
+
+
